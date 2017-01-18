@@ -5,6 +5,8 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+class UProjectileMovementComponent;
+
 UCLASS()
 class TANKGAMETUT_API AProjectile : public AActor
 {
@@ -19,6 +21,10 @@ public:
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
+
+	void LaunchProjectile(float);
+
+	UProjectileMovementComponent* ProjectileMovement;
 
 	
 	

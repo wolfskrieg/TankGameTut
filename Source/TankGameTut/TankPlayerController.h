@@ -5,16 +5,20 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
-class ATank;
-
+class UTankAimingComponent;
 
 UCLASS()
 class TANKGAMETUT_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+protected:
+
+	UFUNCTION(BlueprintImplementableEvent, Category = Setup)
+	void FoundAimingComponent(UTankAimingComponent* AimingComponentReference);
+
 private:
-	ATank* GetControlledTank() const;
+	
 	virtual void BeginPlay() override;
 	virtual void Tick(float) override;
 
@@ -23,13 +27,15 @@ private:
 	bool GetLookDirection(FVector2D, FVector& WorldDirection) const;
 	bool GetLookVectorHitLocation(FVector, FVector&) const;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly, Category = Crosshair)
 	float CrosshairXLocation = 0.5;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly, Category = Crosshair)
 	float CrosshairYLocation = 0.33333;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly, Category = Crosshair)
 	float LineTraceRange = 1000000.f;
+
+	UTankAimingComponent* AimingComponent = nullptr;
 	
 };
